@@ -19,7 +19,7 @@ userPlaceHolder?.addEventListener('click', ()=>{
 
 let serverInfoList: ServerInfo[] = [];
 
-async function getServerInfo(url: string) {
+async function getServerInfo(url: string, name: string) {
   const response = await fetch(url);
 
   const data = await response.json();
@@ -27,7 +27,8 @@ async function getServerInfo(url: string) {
   console.log("success!");
 
   const structuredData = mapServerDataToInfo(data);
-  serverInfoList.push(structuredData);
+  console.log(`Name of the server: ${name}, Info of the server:`,structuredData);
+  // serverInfoList.push(structuredData);
 }
 
 
@@ -44,11 +45,13 @@ async function getServerListInfo() {
   
   if(validServerNames.includes(userInput)){
     const url: string = nameAndLink[userInput] as string;
+    await getServerInfo(url, userInput);
+
   } else{
-    console.log('Test2')
+    console.log('invalid server name')
   }
 
-  await getServerInfo("https://api.mcsrvstat.us/2/mc.hypixel.net");
+  
 
   console.log(serverInfoList);
 }

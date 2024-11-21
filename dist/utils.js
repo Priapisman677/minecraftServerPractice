@@ -1,3 +1,4 @@
+// import {} from './practiceExercise.js'
 export function mapServerDataToInfo(data) {
     return {
         hostname: data.hostname || "unknown", // The server's name
@@ -20,3 +21,4 @@ export const nameAndLink = {
     "purpleprison.org": "https://api.mcsrvstat.us/2/purpleprison.org",
     "herobrine.org": "https://api.mcsrvstat.us/2/herobrine.org",
 };
+export const validServerNames = ['hypixel.net', 'mineplex.com', 'manacube.net', 'mccentral.org', 'purpleprison.org', 'herobrine.org'];

@@ -14,7 +14,7 @@ export interface ServerInfo {
 }
 
 
-
+//* Create a type for the nameAndLink object, I really need to study this TypeScript part:
 interface NameAndLinkMap {
   [key: string]: string; // This allows any string to be used as an index to retrieve a string value.
 }

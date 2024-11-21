@@ -7,20 +7,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { mapServerDataToInfo } from "./utils.js";
+import { mapServerDataToInfo, nameAndLink, validServerNames } from "./utils.js";
 //* Building the function for the "Get server info" button
 const userPlaceHolder = document.querySelector('.getInfoButton');
 userPlaceHolder === null || userPlaceHolder === void 0 ? void 0 : userPlaceHolder.addEventListener('click', () => {
     getServerListInfo();
 });
-const validServerNames = ['hypixel.net', 'mineplex.com', 'manacube.net', 'mccentral.org', 'purpleprison.org', 'herobrine.org'];
+//$ Set a set interval that will be refreshing the information of servers every second
+//$ Start by just adding a refresh button which I believe will be harder.
 let serverInfoList = [];
-function getServerInfo(url) {
+function getServerInfo(url, name) {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch(url);
         const data = yield response.json();
         console.log("success!");
         const structuredData = mapServerDataToInfo(data);
+        console.log(`Name of the server: ${name}, Info of the server:`, structuredData);
         serverInfoList.push(structuredData);
     });
 }
@@ -36,14 +38,12 @@ function getServerListInfo() {
             return;
         }
         if (validServerNames.includes(userInput)) {
-            console.log('test1');
+            const url = nameAndLink[userInput];
+            yield getServerInfo(url, userInput);
         }
         else {
-            console.log('Test2');
+            console.log('invalid server name');
         }
-        yield getServerInfo("https://api.mcsrvstat.us/2/mc.hypixel.net");
-        yield getServerInfo("https://api.mcsrvstat.us/2/us.mineplex.com");
-        yield getServerInfo("https://api.mcsrvstat.us/2/play.manacube.net");
         console.log(serverInfoList);
     });
 }
