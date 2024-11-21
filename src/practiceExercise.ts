@@ -1,15 +1,21 @@
-interface ServerInfo {
-  hostname: string; // The server's name
-  ip: string; // IP address of the server
-  port: number; // Port number
-  online: boolean; // Whether the server is online
-  version: string; // Minecraft version
-  players: {
-    // Player count
-    online: number;
-    max: number;
-  };
-}
+import { mapServerDataToInfo, nameAndLink, validServerNames, ServerInfo} from "./utils.js";
+
+//* Building the function for the "Get server info" button
+const userPlaceHolder: HTMLButtonElement | null = document.querySelector('.getInfoButton')
+
+userPlaceHolder?.addEventListener('click', ()=>{
+  getServerListInfo()
+})
+
+
+
+
+
+
+//$ Set a set interval that will be refreshing the information of servers every second
+//$ Start by just adding a refresh button which I believe will be harder.
+
+
 
 let serverInfoList: ServerInfo[] = [];
 
@@ -24,25 +30,27 @@ async function getServerInfo(url: string) {
   serverInfoList.push(structuredData);
 }
 
+
+
 async function getServerListInfo() {
+  const inputElement = document.querySelector('.one') as HTMLInputElement;
+  let userInput: string = ''
+  if (inputElement) {
+     userInput = inputElement.value;
+  } else {
+    console.error("Element with ID 'one' not found.");
+    return
+  }
+  
+  if(validServerNames.includes(userInput)){
+    const url: string = nameAndLink[userInput] as string;
+  } else{
+    console.log('Test2')
+  }
+
   await getServerInfo("https://api.mcsrvstat.us/2/mc.hypixel.net");
-  await getServerInfo("https://api.mcsrvstat.us/2/us.mineplex.com");
-  await getServerInfo("https://api.mcsrvstat.us/2/play.manacube.net");
+
   console.log(serverInfoList);
 }
-getServerListInfo();
 
-function mapServerDataToInfo(data: any): ServerInfo {
-  return {
-    hostname: data.hostname || "unknown", // The server's name
-    ip: data.ip || "unknown", // IP address of the server
-    port: data.port || "Unknown", // Port number
-    online: data.online || false, // Whether the server is online
-    version: data.version || "unknown", // Minecraft version
-    players: {
-      // Player count
-      online: data.players.online,
-      max: data.players.max,
-    },
-  };
-}
+console.log(getServerListInfo)
