@@ -1,0 +1,8 @@
+.textInput, .getInfoButton{
+  height: 40px; /* Same height */
+  padding: 0;
+  border: 1px solid #ccc; /* Add a consistent border */
+  box-sizing: border-box; /* Consistent box model */
+  font-family: inherit; /* Ensure consistent font */
+  line-height: 1; /* Prevent extra spacing */
+}

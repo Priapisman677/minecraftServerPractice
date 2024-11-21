@@ -1,0 +1,14 @@
+/* I unsuccessfully managed to wrap the text in the body whenever there needs to be a line break so I believe that whenever you're able to use that notation to separate the values this down here shouldn't even make sense: */
+
+
+.serverInfo{
+  width: 100%;
+  object-fit: contain;
+  
+}
+
+.serverInfoText{
+  color: rgb(72, 255, 0);
+  width: 90%;
+
+}
